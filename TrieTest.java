@@ -1,6 +1,6 @@
 /**
  * Test code for the Trie data structure
- * @author  Akbarli Sodikov
+ * @author  Akbarali Sodikov
  * @author  Lucas Almedia
  * @author  Lucas Liang
  * @author  Milton Rue  
