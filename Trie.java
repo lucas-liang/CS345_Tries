@@ -25,6 +25,34 @@ public class Trie {
         
     }
 
+    
+    // Finding words with a certain prefix 
+    public ArrayList<String> findWordsWithPrefix(String prefix) {
+        List<String> result = new ArrayList<>();
+        TrieNode node = root;
+        for (char c: prefix.toCharArray()) {
+            if (!node.children.containsKey(c)) {
+                return result; 
+            }
+            node = node.children.get(c);
+        }
+
+        findAllWordsFromNode(node, prefix, result);
+        return result;
+    }
+    
+    // Counting words with a certain prefix
+    public int countWordsWithPrefix(String prefix) {
+        TrieNode node = root;
+        for (char c: prefix.toCharArray()) {
+            if (!node.children.containsKey(c)) {
+                return 0; 
+            }
+            node = node.children.get(c);
+        }
+        return countWordsFromNode(node);
+    }
+    
     private TrieNode searchPrefix(String prefix) {
         
     }
