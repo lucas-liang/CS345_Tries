@@ -34,6 +34,7 @@ public class Trie {
         for (int i = 0; i < word.length(); i++) {
             // 
             if (!curr.children.containsKey(word.charAt(i))) return false;
+            curr = curr.children.get(word.charAt(i));
         }
 
         return curr.isEndOfWord;
@@ -53,7 +54,7 @@ public class Trie {
             // move pointer
             curr = curr.children.get(currChar);
         }
-
+        curr.isEndOfWord = false;
         return curr.isEndOfWord;
     }
    
@@ -74,12 +75,12 @@ public class Trie {
             curr = curr.children.get(c);
         }
 
-        findAllWords(prefix, curr, result, new ArrayList<Character>());
+        findAllWordsPrefix(prefix, curr, result, new ArrayList<Character>());
 
         return result;
     }
 
-    private void findAllWords(String prefix, TrieNode curr, List<String> currList, List<Character> path) {
+    private void findAllWordsPrefix(String prefix, TrieNode curr, List<String> currList, List<Character> path) {
 
         if (curr == null) {
             return;
@@ -96,7 +97,7 @@ public class Trie {
 
         for (Character c : curr.children.keySet()) {
             path.add(c);
-            findAllWords(prefix, curr.children.get(c), currList, path);
+            findAllWordsPrefix(prefix, curr.children.get(c), currList, path);
             path.remove(path.size()-1);
         }
     }
@@ -108,6 +109,45 @@ public class Trie {
      */
     public int countWordsWithPrefix(String prefix) {
         return findWordsWithPrefix(prefix).size();
+    }
+
+    public void printWordsWithPrefix(String prefix){
+        List<String> allWords = findWordsWithPrefix(prefix);
+        for(String word : allWords){
+            System.out.println(word);
+        }
+    }
+
+    public void printAllWords(){
+        List<String> words = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
+        for(String s : words){
+            System.out.println(s);
+        }
+
+    }
+
+    public int size(){
+        List<String> words = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
+        return words.size();
+    }
+
+    private List<String> findAllWords(List<String> result, TrieNode root, List<Character> path){
+        if(root == null){
+            return null;
+        }
+        if(root.isEndOfWord == true){
+            String strRes = "";
+            for(int i = 0; i < path.size(); i++){
+                strRes += String.valueOf(path.get(i));
+            }
+            result.add(strRes);
+        }
+        for(Character c : root.children.keySet()){
+            path.add(c);
+            findAllWords(result, root.children.get(c), path);
+            path.remove(c);
+        }
+        return result;
     }
 
     private class TrieNode {
