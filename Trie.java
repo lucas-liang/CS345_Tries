@@ -113,16 +113,12 @@ public class Trie {
 
     public void printWordsWithPrefix(String prefix){
         List<String> allWords = findWordsWithPrefix(prefix);
-        for(String word : allWords){
-            System.out.println(word);
-        }
+        System.out.println(allWords);
     }
 
     public void printAllWords(){
-        List<String> words = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
-        for(String s : words){
-            System.out.println(s);
-        }
+        List<String> allWords = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
+        System.out.println(allWords);
 
     }
 
