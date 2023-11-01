@@ -9,9 +9,11 @@ import java.util.*;
 
 public class Trie {
     private TrieNode root;
+    private int size;
 
     public Trie() {
         root = new TrieNode();
+        size = 0;
     }
 
     public void insert(String word) {
@@ -24,7 +26,11 @@ public class Trie {
             }
             curr = curr.children.get(currChar);
         }
+        if(curr.isEndOfWord){
+            return;
+        }
         curr.isEndOfWord = true;
+        size++;
     }
 
     public boolean doesWordExist(String word) {
@@ -54,8 +60,12 @@ public class Trie {
             // move pointer
             curr = curr.children.get(currChar);
         }
+        if(!curr.isEndOfWord){
+            return false;
+        }
         curr.isEndOfWord = false;
-        return curr.isEndOfWord;
+        size--;
+        return true;
     }
    
 
@@ -127,8 +137,7 @@ public class Trie {
     }
 
     public int size(){
-        List<String> words = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
-        return words.size();
+        return this.size;
     }
 
     private List<String> findAllWords(List<String> result, TrieNode root, List<Character> path){
