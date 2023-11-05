@@ -56,6 +56,9 @@ public class TrieTest {
         t.insert("hello");
         t.insert("hello");
         System.out.println("The size of the trie is: " + t.size());
+        System.out.println('\n');
+        System.out.println("Printing all words in the trie!");
+        t.printAllWords();
         System.out.println("------------------------------------------------------------ \n");
     } 
 
