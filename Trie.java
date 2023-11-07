@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- * Implements a Trie data structure
+ * Implements a Trie data structure otherwise known as a prefix tree
  * @author  Akbarali Sodikov
  * @author  Lucas Almedia
  * @author  Lucas Liang
@@ -15,7 +15,10 @@ public class Trie {
         root = new TrieNode();
         size = 0;
     }
-
+    /**
+     * Inserts a word into trie
+     * @param word word to be inserted
+     */
     public void insert(String word) {
         TrieNode curr = this.root;
         for (int i = 0; i < word.length(); i++) {
@@ -33,6 +36,11 @@ public class Trie {
         size++;
     }
 
+    /**
+     * checks if a word exists in the trie
+     * @param word word to be looked for
+     * @return boolean of if the word exists or not
+     */
     public boolean doesWordExist(String word) {
        
         TrieNode curr = this.root;
@@ -72,8 +80,8 @@ public class Trie {
     
     /**
      * get list of words that start with prefix
-     * @param prefix
-     * @return
+     * @param prefix prefix in question
+     * @return list of all words in trie that have that prefix
      */
     public List<String> findWordsWithPrefix(String prefix) {
         List<String> result = new ArrayList<>();
@@ -90,6 +98,13 @@ public class Trie {
         return result;
     }
 
+    /**
+     * private helper method for findWordsWithPrefix
+     * @param prefix prefix to look for
+     * @param curr current node
+     * @param currList final list of words
+     * @param path list that contains characters of current path so far
+     */
     private void findAllWordsPrefix(String prefix, TrieNode curr, List<String> currList, List<Character> path) {
 
         if (curr == null) {
@@ -121,11 +136,18 @@ public class Trie {
         return findWordsWithPrefix(prefix).size();
     }
 
+    /**
+     * prints all the words in the trie with specific prefix
+     * @param prefix prefix in question
+     */
     public void printWordsWithPrefix(String prefix){
         List<String> allWords = findWordsWithPrefix(prefix);
         System.out.println(allWords);
     }
 
+    /**
+     * prints all words in the trie
+     */
     public void printAllWords(){
         List<String> allWords = findAllWords(new ArrayList<String>(), root, new ArrayList<Character>());
         System.out.println(allWords);
@@ -136,6 +158,13 @@ public class Trie {
         return this.size;
     }
 
+    /**
+     * private helper method for findAllWords
+     * @param result list of words so far
+     * @param root current node
+     * @param path list of characters for current path so far
+     * @return list of all words in trie
+     */
     private List<String> findAllWords(List<String> result, TrieNode root, List<Character> path){
         if(root == null){
             return null;
@@ -155,6 +184,9 @@ public class Trie {
         return result;
     }
 
+    /**
+     * private class that represents a node in the trie
+     */
     private class TrieNode {
         Character key;
         HashMap<Character,TrieNode> children;
