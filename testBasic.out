@@ -1,0 +1,14 @@
+Does 'hello' exist: true
+Does 'hi' exist: true
+Count of words starting with 'h': 2
+Does 'hi' exist after removal: false
+Count of words starting with 'h' after removal: 1
+All words in the Trie:
+akbar
+bye
+hello
+yo
+lucas
+milt
+------------------------------------------------------------
+
