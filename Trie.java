@@ -179,7 +179,7 @@ public class Trie {
         for(Character c : root.children.keySet()){
             path.add(c);
             findAllWords(result, root.children.get(c), path);
-            path.remove(c);
+            path.remove(path.size()-1);
         }
         return result;
     }
