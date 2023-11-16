@@ -184,6 +184,56 @@ public class Trie {
         return result;
     }
 
+    /*
+     * Finds and returns a list of all words traversing the tree with preorder traversal
+     */
+    public List<String> preorder(){
+        return findIntWords(new ArrayList<String>(), root, new ArrayList<Character>());
+    }
+
+    /**
+     * private helper for preorder traversal
+     * @param result list of words so far
+     * @param root current node
+     * @param path list of characters for current path so far
+     * @return list of all words in trie
+     */
+    private List<String> findIntWords(List<String> result, TrieNode root, List<Character> path){
+        if(root == null){
+            return null;
+        }
+        if(root.isEndOfWord == true){
+            String strRes = "";
+            for(int i = 0; i < path.size(); i++){
+                strRes += String.valueOf(path.get(i));
+            }
+            result.add(strRes);
+        }
+        for(int i = 0; i <= 9; i++){
+            Character c = Character.forDigit(i, 10);
+            if(root.children.keySet().contains(c)){
+                path.add(c);
+                findIntWords(result, root.children.get(c), path);
+                path.remove(path.size()-1);
+            }
+        }
+        return result;
+    }
+
+    /*
+     * Finds the longest prefix that all words in the Trie share
+     */
+    public String findCommonPrefix(){
+        TrieNode cur = root;
+        String res = "";
+        while(!cur.isEndOfWord && cur.children.keySet().size() == 1){
+            Character next = cur.children.keySet().iterator().next();
+            res += String.valueOf(next);
+            cur = cur.children.get(next);
+        }
+        return res;
+    }
+
     /**
      * private class that represents a node in the trie
      */
