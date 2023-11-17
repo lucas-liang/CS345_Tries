@@ -63,16 +63,19 @@ public class TrieTest {
     } 
 
     /**
-     * Tests insert using 1,000 unique word text file.
+     * Tests insert using 1,000 unique word text file, checks to see
+     * if contents of the file are the same as the Trie.
      */
 
     private static void testFile1(){
+        ArrayList<String> allWords = new ArrayList<>();
         Trie t = new Trie();
         try {
             BufferedReader reader = new BufferedReader(new FileReader("uniqueWords.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 t.insert(line);
+                allWords.add(line);
             }
             reader.close();
         } catch (IOException e) {
@@ -81,6 +84,21 @@ public class TrieTest {
 
         System.out.println("Total words in the file: 1000\n");
         System.out.println("Total words in the Trie after adding words from the file: " + t.size());
+        Collections.sort(allWords);
+        List<String> trieWords = t.findWordsWithPrefix("");
+        Collections.sort(trieWords);
+        boolean flag = false;
+        for(int i = 0; i < allWords.size(); i++){
+            if(!allWords.get(i).equals(trieWords.get(i))){
+                flag = true;
+            }
+        }
+        if(flag){
+            System.out.println("ARRAYS DO NOT MATCH");
+        }
+        else{
+            System.out.println("ARRAYS DO MATCH");
+        }
 
         System.out.println("------------------------------------------------------------ \n");
     }
