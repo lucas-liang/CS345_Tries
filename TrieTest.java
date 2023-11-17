@@ -35,6 +35,7 @@ public class TrieTest {
    
         System.out.println("Does 'hello' exist: " + t.doesWordExist("hello"));
         System.out.println("Does 'hi' exist: " + t.doesWordExist("hi"));
+        System.out.println("Does 'hippie' exist: " + t.doesWordExist("hippie"));
         System.out.println("Count of words starting with 'h': " + t.countWordsWithPrefix("h"));
         t.removeWord("hi");
         System.out.println("Does 'hi' exist after removal: " + t.doesWordExist("hi"));
@@ -124,7 +125,7 @@ public class TrieTest {
         System.out.println("Total words in the Trie after adding words from the file: " + t.size());
         List<String> words = t.findWordsWithPrefix("zy");
         String wordsZY = "zygote, zygotes, zygotic, zymology, zymurgy";
-        System.out.println("Words that start with zy are: " + wordsZY + "\n");
+        System.out.println("Expected words that start with zy are: " + wordsZY + "\n");
         System.out.println("The Trie found the following words start with zy: ");
         for(String s : words){
             System.out.println(s);
